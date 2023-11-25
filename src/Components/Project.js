@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import RenameProject from "./RenameProject";
 import { Pencil, XCircle } from "react-bootstrap-icons";
+import Modal from "./Modal";
 
 function Project({ project, edit }) {
+  const [showModal, setShowModal] = useState(false);
   return (
     <div className="Project">
       <div className="name">{project.name}</div>
       <div className="btns">
         {edit ? (
           <div className="edit-delete">
-            <span className="edit">
+            <span className="edit" onClick={() => setShowModal(true)}>
               <Pencil size="13" />
             </span>
             <span className="delete">
@@ -22,6 +24,11 @@ function Project({ project, edit }) {
           <div className="total-todos">{project.numOfTodos}</div>
         )}
       </div>
+
+      {/* Modal Component here */}
+      <Modal showModal={showModal} setShowModal={setShowModal}>
+        <RenameProject project={project} setShowModal={setShowModal} />
+      </Modal>
     </div>
   );
 }
