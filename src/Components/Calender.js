@@ -1,7 +1,7 @@
 import React from "react";
 
 function Calender() {
-  return <div className="User">User</div>;
+  return <div className="Calender">Calender</div>;
 }
 
 export default Calender;
