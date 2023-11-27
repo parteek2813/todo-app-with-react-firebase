@@ -7,6 +7,7 @@ import {
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
+import TodoForm from "./TodoForm";
 
 function AddNewTodo() {
   const [showModal, setShowModal] = useState(false);
@@ -14,71 +15,32 @@ function AddNewTodo() {
   const [day, setDay] = useState(new Date());
   const [time, setTime] = useState(new Date());
 
+  const projects = [
+    { id: 1, name: "personal", numOfTodos: 0 },
+    { id: 2, name: "work", numOfTodos: 1 },
+    { id: 3, name: "other", numOfTodos: 2 },
+  ];
+
+  function handleSubmit(e) {}
+
   return (
     <div className="AddNewTodo">
       <div className="btn">
         <button onClick={() => setShowModal(true)}>+ New Todo</button>
       </div>
       <Modal showModal={showModal} setShowModal={setShowModal}>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <form>
-            <div className="text">
-              <h3>Add new todo!</h3>
-              <input
-                type="text"
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                placeholder="to do .."
-                autoFocus
-              />
-            </div>
-
-            {/* remind */}
-            <div className="remind">
-              <Bell />
-              <p>Remind Me</p>
-            </div>
-
-            {/* pick day */}
-            <div className="pick-day">
-              <div className="title">
-                <CalendarDay />
-                <p>Choose a day</p>
-              </div>
-              <DatePicker value={day} onChange={(day) => setDay(day)} />
-            </div>
-
-            {/* pick time */}
-            <div className="pick-time">
-              <div className="title">
-                <Clock />
-                <p>Choose time</p>
-              </div>
-              <TimePicker value={time} onChange={(time) => setTime(time)} />
-            </div>
-
-            {/* pick project */}
-            <div className="pick-project">
-              <div className="title">
-                <Palette />
-                <p>Choose a project</p>
-              </div>
-
-              <div className="projects">
-                <div className="project active">Personal</div>
-                <div className="project">Work</div>
-              </div>
-            </div>
-
-            {/* Cancel and confirm */}
-            <div className="cancel" onClick={() => setShowModal(false)}>
-              <X size="40" />
-            </div>
-            <div className="confirm">
-              <button>+ Add to do</button>
-            </div>
-          </form>
-        </MuiPickersUtilsProvider>
+        <TodoForm
+          handleSubmit={handleSubmit}
+          heading="Add new to do!"
+          text={text}
+          day={day}
+          setDay={setDay}
+          time={time}
+          setTime={setTime}
+          projects={projects}
+          showButtons={true}
+          setShowModal={setShowModal}
+        />
       </Modal>
     </div>
   );
