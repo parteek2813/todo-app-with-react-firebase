@@ -33,6 +33,7 @@ function AddNewTodo() {
           handleSubmit={handleSubmit}
           heading="Add new to do!"
           text={text}
+          setText={setText}
           day={day}
           setDay={setDay}
           time={time}
